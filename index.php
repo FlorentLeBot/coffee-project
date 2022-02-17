@@ -1,21 +1,14 @@
 <?php
 
+require("vendor/autoload.php");
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-// // function bdd()
-// // {
-// //     try {
-// //         $bdd = new PDO("mysql:dbname=abclight;host=localhost", "root", "");
-// //     } catch (PDOException $e) {
-// //         echo "Connexion impossible: " . $e->getMessage();
-// //     }
-// //     return $bdd;
-// // }
-
-$host = 'mysql-69231-0.cloudclusters.net:17774';
-$dbname = 'abclight';
-$username = 'admin';
-$password = 'DO2KbDQN';
+$host = $_ENV["DB_HOST"] . ":" . $_ENV["DB_PORT"];
+$dbname = $_ENV["DB_NAME"];
+$username = $_ENV["DB_USERNAME"];
+$password = $_ENV["DB_PASSWORD"];
 
 $query = "SELECT name FROM waiter";
 
@@ -26,7 +19,6 @@ try {
     $password,
     array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
   );
-  // var_dump($conn);
   $stmt = $conn->query($query);
 } catch (PDOException $e) {
 
@@ -38,17 +30,14 @@ try {
 <!DOCTYPE html>
 <html>
 
-<head></head>
 
 <body>
 
   <p><?= "Hello world !"; ?></p>
-  
+
   <h1>Liste des serveurs</h1>
 
   <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) : ?>
-
-
 
     <p><?php echo htmlspecialchars($row['name']); ?></p>
 
