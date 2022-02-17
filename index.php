@@ -12,6 +12,9 @@ $username = $_ENV["DB_USERNAME"];
 $password = $_ENV["DB_PASSWORD"];
 
 $query = "SELECT name FROM waiter";
+$query2 = "SELECT name FROM edible ";
+
+
 
 try {
   $conn = new PDO(
@@ -21,10 +24,16 @@ try {
     array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
   );
   $stmt = $conn->query($query);
+  $stmt2 = $conn->query($query2);
 } catch (PDOException $e) {
 
   die("Impossible de se connecter à la base de données $dbname :" . $e->getMessage());
 }
+
+
+
+
+
 
 ?>
 
@@ -43,6 +52,15 @@ try {
     <p><?php echo htmlspecialchars($row['name']); ?></p>
 
   <?php endwhile; ?>
+
+  <h2>Liste des cafés</h2>
+
+  <?php while ($row = $stmt2->fetch(PDO::FETCH_ASSOC) ): ?>)
+
+    <p><?php echo htmlspecialchars($row['name']); ?></p>
+
+    <?php endwhile; ?>
+
 
 </body>
 
