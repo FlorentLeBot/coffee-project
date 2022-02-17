@@ -12,7 +12,7 @@ $username = $_ENV["DB_USERNAME"];
 $password = $_ENV["DB_PASSWORD"];
 
 $query = "SELECT name FROM waiter";
-$query2 = "SELECT name FROM edible ";
+$query2 = "SELECT * FROM edible ";
 
 
 
@@ -55,11 +55,11 @@ try {
 
   <h2>Liste des cafés</h2>
 
-  <?php while ($row = $stmt2->fetch(PDO::FETCH_ASSOC) ): ?>)
+  <?php while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)): ?>
 
-    <p><?php echo htmlspecialchars($row['name']); ?></p>
+    <p><?php echo htmlspecialchars($row['name'] . " => " . $row['price']); ?></p>
 
-    <?php endwhile; ?>
+  <?php endwhile; ?>
 
 
 </body>
