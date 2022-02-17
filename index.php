@@ -1,9 +1,10 @@
 <?php
 
 require("vendor/autoload.php");
-
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
+if ($_SERVER['HTTP_HOST'] != "coffee-k6-lbf.herokuapp.com") {
+  $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+  $dotenv->load();
+}
 
 $host = $_ENV["DB_HOST"] . ":" . $_ENV["DB_PORT"];
 $dbname = $_ENV["DB_NAME"];
