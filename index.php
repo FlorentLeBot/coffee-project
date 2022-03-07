@@ -207,6 +207,9 @@ try {
     echo  "<br/>"  . $order["waiter"] . " | " . $carbon->locale('fr')->diffForHumans() . " | " . $order["turnover"];
   }
   ?>
+  <?php 
+  $x = 1;
+   ?>
 
 
 
